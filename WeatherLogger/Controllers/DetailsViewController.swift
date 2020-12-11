@@ -1,6 +1,10 @@
 import UIKit
 import MapKit
 
+enum DetailsViewLabelGroup: String {
+    case general, details
+}
+
 class DetailsViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var scrollView: UIScrollView! {
@@ -21,33 +25,22 @@ class DetailsViewController: UIViewController, Storyboarded {
         }
     }
     
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    
-    @IBOutlet weak var presureLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windSpeedLabel: UILabel!
-    @IBOutlet weak var windDirectionLabel: UILabel!
+    @IBOutlet var generalLabels: [UILabel]!
+    @IBOutlet var detailsLabels: [UILabel]!
     
     var weather: WeatherObject?
     
+    func setupLabels() {
+        guard let weather = self.weather else { return }
+        let generalLabelText = Helpers.shared.prepareLabelText(from: weather, for: .general)
+        let detailsLabelText = Helpers.shared.prepareLabelText(from: weather, for: .details)
+        Helpers.shared.prepareLabelsContent(with: generalLabelText, for: &generalLabels)
+        Helpers.shared.prepareLabelsContent(with: detailsLabelText, for: &detailsLabels)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let weather = self.weather else { return }
-
-        temperatureLabel.text = Helpers.shared.parseTemperature(from: weather.temperature)
-        feelsLikeLabel.text = Helpers.shared.parseTemperature(from: weather.feelsLike)
-        dateLabel.text = weather.date.format()
-        locationLabel.text = weather.location
-        
-        presureLabel.text = String(weather.presure)
-        humidityLabel.text = String(weather.humidity)
-        windSpeedLabel.text = String(weather.windSpeed)
-        windDirectionLabel.text = String(weather.windDirection)
-        
+        setupLabels()
         configureMap()
     }
     
@@ -63,14 +56,7 @@ class DetailsViewController: UIViewController, Storyboarded {
 
 extension DetailsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        if offset.y < 0.0 {
-            var transform = CATransform3DTranslate(CATransform3DIdentity, 0, (offset.y), 0)
-            let scaleFactor = 1 + (-1 * offset.y / (mapView.frame.size.height / 2))
-            transform = CATransform3DScale(transform, scaleFactor, scaleFactor, 1)
-            mapView.layer.transform = transform
-        } else {
-            mapView.layer.transform = CATransform3DIdentity
-        }
+        let transform = Helpers.shared.transformOnScroll(with: scrollView.contentOffset, and: mapView.frame.size.height)
+        mapView.layer.transform = transform
     }
 }

@@ -283,16 +283,16 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateLabel" destination="ool-v3-Sg7" id="tIC-wD-aUy"/>
-                        <outlet property="feelsLikeLabel" destination="49N-Xw-cSr" id="liw-A3-12m"/>
-                        <outlet property="humidityLabel" destination="rXT-3h-g4x" id="38I-P9-Q4X"/>
-                        <outlet property="locationLabel" destination="vPP-Zx-Tbh" id="STV-ZV-7eI"/>
                         <outlet property="mapView" destination="R69-vS-iHi" id="Biq-eo-igY"/>
-                        <outlet property="presureLabel" destination="A2b-Wr-4TG" id="gfJ-DA-6V9"/>
                         <outlet property="scrollView" destination="oTc-y8-rgF" id="442-cD-Dce"/>
-                        <outlet property="temperatureLabel" destination="Uad-xk-cs9" id="wNe-mP-dWf"/>
-                        <outlet property="windDirectionLabel" destination="v5Y-gp-uEO" id="zUW-KT-n1q"/>
-                        <outlet property="windSpeedLabel" destination="r0w-nO-M7c" id="YoJ-74-cpl"/>
+                        <outletCollection property="generalLabels" destination="Uad-xk-cs9" collectionClass="NSMutableArray" id="OZl-UW-B77"/>
+                        <outletCollection property="generalLabels" destination="49N-Xw-cSr" collectionClass="NSMutableArray" id="G46-nT-4sD"/>
+                        <outletCollection property="generalLabels" destination="ool-v3-Sg7" collectionClass="NSMutableArray" id="wIz-23-10L"/>
+                        <outletCollection property="generalLabels" destination="vPP-Zx-Tbh" collectionClass="NSMutableArray" id="ZqP-vz-mPt"/>
+                        <outletCollection property="detailsLabels" destination="A2b-Wr-4TG" collectionClass="NSMutableArray" id="VxZ-Sa-SEg"/>
+                        <outletCollection property="detailsLabels" destination="rXT-3h-g4x" collectionClass="NSMutableArray" id="8Xo-JJ-j6E"/>
+                        <outletCollection property="detailsLabels" destination="r0w-nO-M7c" collectionClass="NSMutableArray" id="wmt-rR-bHq"/>
+                        <outletCollection property="detailsLabels" destination="v5Y-gp-uEO" collectionClass="NSMutableArray" id="2lG-T5-Pe2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
