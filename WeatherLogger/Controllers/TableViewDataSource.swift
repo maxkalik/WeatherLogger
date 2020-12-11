@@ -11,7 +11,8 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
     
     let tableView: UITableView
     var list = [WeatherObject]()
-    
+    var coordinator: MainCoordinator?
+
     init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
@@ -43,17 +44,8 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    // func getWeather(from coordinate: Coordinate) {
-    //     NetworkService.shared.fetchWeather(from: coordinate.latitude, longitude: coordinate.longitude) { [self] result in
-    //         switch result {
-    //         case .success(let data):
-    //             let weather = WeatherObject(data: data, coordinate: coordinate)
-    //             insertRow(with: weather)
-    //         case .failure(let error):
-    //             print(error.localizedDescription)
-    //             // simpleAlert(title: "Error", msg: error.localizedDescription)
-    //         }
-    //     }
-    // }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator?.navigateToDetails(with: list[indexPath.row])
+    }
 
 }

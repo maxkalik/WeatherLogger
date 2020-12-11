@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, Storyboarded, LocationManagerDelegat
         view.addSubview(progressView)
         progressView.hide()
         tableViewDataSource = HomeTableViewDataSource(tableView: tableView)
+        tableViewDataSource?.coordinator = coordinator
         locationManager = LocationManager()
         locationManager?.delegate = self
     }
