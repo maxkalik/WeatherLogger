@@ -12,11 +12,6 @@
 import UIKit
 import CoreLocation
 
-struct CurrentLocation: Equatable {
-    let latitude: CLLocationDegrees
-    let longitude: CLLocationDegrees
-}
-
 class HomeViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var tableView: UITableView! {
@@ -32,9 +27,10 @@ class HomeViewController: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator?
     var weatherList = [WeatherObject]()
-    // var currentWeather: WeatherObject?
     
-    var currentLocation: CurrentLocation? {
+    private var pogressView = ProgressView(title: "Fetching...")
+    
+    var currentCoordinate: Coordinate? {
         didSet {
             getWeather()
         }
@@ -46,23 +42,25 @@ class HomeViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         locationManger = CLLocationManager()
         locationManger?.delegate = self
+        
+        view.addSubview(pogressView)
+        pogressView.hide()
     }
     
     func getWeather() {
-        guard let currentLocation = self.currentLocation else { return }
-        NetworkService.shared.fetchWeather(from: currentLocation.latitude, longitude: currentLocation.longitude) { [self] result in
+        guard let currentCoordinate = self.currentCoordinate else { return }
+        NetworkService.shared.fetchWeather(from: currentCoordinate.latitude, longitude: currentCoordinate.longitude) { [self] result in
             switch result {
             case .success(let data):
                 
-                let imgURL = URL(string: "http://openweathermap.org/img/wn/\(data.weather[0].icon)@2x.png")
-                guard let img = imgURL else { return }
-                
+                guard let img = Helpers.shared.generateIconUrl(with: data.weather[0].icon) else { return }
                 let location = "\(data.name), \(data.sys.country)"
                 
-                let weather = WeatherObject(temperature: data.main.temp, feelsLike: data.main.feelsLike, date: Date(), location: location, presure: data.main.pressure, humidity: data.main.humidity, windSpeed: data.wind.speed, windDirection: "NW", image: img)
+                let weather = WeatherObject(temperature: data.main.temp, feelsLike: data.main.feelsLike, date: Date(), location: location, presure: data.main.pressure, humidity: data.main.humidity, windSpeed: data.wind.speed, windDirection: "NW", image: img, coordinate: currentCoordinate)
                 
                 weatherList.insert(weather, at: 0)
                 DispatchQueue.main.async {
+                    self.pogressView.hide()
                     self.tableView.insertRows(at: [IndexPath(item: 0, section: 0)], with: .fade)
                 }
                 
@@ -73,7 +71,7 @@ class HomeViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        currentLocation = nil // update
+        currentCoordinate = nil // update
         startGetingLocation()
     }
 }
@@ -89,20 +87,17 @@ extension Date {
 
 extension HomeViewController: CLLocationManagerDelegate {
     private func startGetingLocation() {
-        print("start getting location")
         locationManger?.requestAlwaysAuthorization()
         locationManger?.startUpdatingLocation()
-        
-        // locationManger?.desiredAccuracy = kCLLocationAccuracyBest
-        // locationManger?.requestLocation()
+        pogressView.show()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             locationManger?.stopUpdatingLocation()
             
-            if self.currentLocation == nil {
-                self.currentLocation = CurrentLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            if self.currentCoordinate == nil {
+                self.currentCoordinate = Coordinate(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
         }
     }
@@ -119,8 +114,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell {
+            
             let weather = weatherList[indexPath.row]
-            let temperature = String(format: "%.0f", weather.temperature - 273.15)
+            
+            let temperature = Helpers.shared.parseTemperature(from: weather.temperature)
             cell.configure(image: weather.image, temperature: temperature, date: weather.date.format(), location: weather.location)
             cell.selectionStyle = .none
             return cell

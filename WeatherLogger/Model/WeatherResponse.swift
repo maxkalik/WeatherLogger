@@ -50,4 +50,5 @@ struct WeatherObject {
     let windSpeed: Double
     let windDirection: String
     let image: URL
+    let coordinate: Coordinate
 }

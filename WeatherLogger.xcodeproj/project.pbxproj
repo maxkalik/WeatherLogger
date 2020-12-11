@@ -11,6 +11,9 @@
 		114E8ADE2582A89000043C70 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114E8ADC2582A89000043C70 /* TableViewCell.xib */; };
 		114E8B1E2582C88300043C70 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B1D2582C88300043C70 /* Location.swift */; };
 		114E8B222582D62800043C70 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B212582D62800043C70 /* UIImageView.swift */; };
+		114E8B252583050F00043C70 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B242583050F00043C70 /* ProgressView.swift */; };
+		114E8B282583117A00043C70 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B272583117A00043C70 /* Helpers.swift */; };
+		114E8B2B2583192C00043C70 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B2A2583192C00043C70 /* Coordinate.swift */; };
 		116CDEE32581524200793435 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CDEE22581524200793435 /* WeatherResponse.swift */; };
 		116CDEE72581528D00793435 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CDEE62581528D00793435 /* URLSession.swift */; };
 		116CDEED2581538800793435 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116CDEEC2581538800793435 /* NetworkService.swift */; };
@@ -31,6 +34,9 @@
 		114E8ADC2582A89000043C70 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		114E8B1D2582C88300043C70 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		114E8B212582D62800043C70 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		114E8B242583050F00043C70 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		114E8B272583117A00043C70 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		114E8B2A2583192C00043C70 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		116CDEE22581524200793435 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		116CDEE62581528D00793435 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		116CDEEC2581538800793435 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				114E8B1D2582C88300043C70 /* Location.swift */,
+				114E8B272583117A00043C70 /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -105,6 +112,7 @@
 		116CDEF025815CC600793435 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				114E8B242583050F00043C70 /* ProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				116CDEE22581524200793435 /* WeatherResponse.swift */,
+				114E8B2A2583192C00043C70 /* Coordinate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +262,7 @@
 			files = (
 				116CDEE32581524200793435 /* WeatherResponse.swift in Sources */,
 				116CDEE72581528D00793435 /* URLSession.swift in Sources */,
+				114E8B2B2583192C00043C70 /* Coordinate.swift in Sources */,
 				11701B552580164C00F1423F /* DetailsViewController.swift in Sources */,
 				114E8B222582D62800043C70 /* UIImageView.swift in Sources */,
 				11701B512580164C00F1423F /* AppDelegate.swift in Sources */,
@@ -262,7 +272,9 @@
 				116CDEED2581538800793435 /* NetworkService.swift in Sources */,
 				11953A0225816DA400E73C38 /* Storyboarded.swift in Sources */,
 				119539FE25816CE000E73C38 /* MainCoordinator.swift in Sources */,
+				114E8B252583050F00043C70 /* ProgressView.swift in Sources */,
 				114E8B1E2582C88300043C70 /* Location.swift in Sources */,
+				114E8B282583117A00043C70 /* Helpers.swift in Sources */,
 				11701B532580164C00F1423F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
