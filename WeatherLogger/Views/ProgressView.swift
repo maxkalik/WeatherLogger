@@ -45,6 +45,7 @@ class ProgressView: UIVisualEffectView {
         
         activityIndictor.startAnimating()
         activityIndictor.hidesWhenStopped = true
+        // isHidden = true
     }
     
     override func didMoveToSuperview() {

@@ -12,125 +12,48 @@
 import UIKit
 import CoreLocation
 
-class HomeViewController: UIViewController, Storyboarded {
+class HomeViewController: UIViewController, Storyboarded, LocationManagerDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            print("table view set")
-            let nib = UINib(nibName: "TableViewCell", bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.separatorStyle = .none
-        }
-    }
-    
     weak var coordinator: MainCoordinator?
-    var weatherList = [WeatherObject]()
-    
-    private var pogressView = ProgressView(title: "Fetching...")
-    
-    var currentCoordinate: Coordinate? {
-        didSet {
-            getWeather()
-        }
-    }
-    
-    private var locationManger: CLLocationManager?
+
+    private var tableViewDataSource: HomeTableViewDataSource?
+    private var locationManager: LocationManager?
+    private var progressView = ProgressView(title: "Fetching...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManger = CLLocationManager()
-        locationManger?.delegate = self
         
-        view.addSubview(pogressView)
-        pogressView.hide()
+        view.addSubview(progressView)
+        progressView.hide()
+        tableViewDataSource = HomeTableViewDataSource(tableView: tableView)
+        locationManager = LocationManager()
+        locationManager?.delegate = self
     }
     
-    func getWeather() {
-        guard let currentCoordinate = self.currentCoordinate else { return }
-        NetworkService.shared.fetchWeather(from: currentCoordinate.latitude, longitude: currentCoordinate.longitude) { [self] result in
+    func didUpdateCurrentCoordinate(_ coordinate: Coordinate) {
+        NetworkService.shared.fetchWeather(from: coordinate.latitude, longitude: coordinate.longitude) { [self] result in
             switch result {
             case .success(let data):
-                
-                guard let img = Helpers.shared.generateIconUrl(with: data.weather[0].icon) else { return }
-                let location = "\(data.name), \(data.sys.country)"
-                
-                let weather = WeatherObject(temperature: data.main.temp, feelsLike: data.main.feelsLike, date: Date(), location: location, presure: data.main.pressure, humidity: data.main.humidity, windSpeed: data.wind.speed, windDirection: "NW", image: img, coordinate: currentCoordinate)
-                
-                weatherList.insert(weather, at: 0)
+                let weather = WeatherObject(data: data, coordinate: coordinate)
+                tableViewDataSource?.insertRow(with: weather)
                 DispatchQueue.main.async {
-                    self.pogressView.hide()
-                    self.tableView.insertRows(at: [IndexPath(item: 0, section: 0)], with: .fade)
+                    progressView.hide()
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
+                simpleAlert(title: "Error", msg: error.localizedDescription)
             }
         }
     }
     
+    func didFailWithError(_ error: Error) {
+        simpleAlert(title: "Error", msg: error.localizedDescription)
+    }
+
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        currentCoordinate = nil // update
-        startGetingLocation()
-    }
-}
-
-extension Date {
-    func format() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm, dd MMM YYYY"
-        let today = dateFormatter.string(from: self)
-        return today
-    }
-}
-
-extension HomeViewController: CLLocationManagerDelegate {
-    private func startGetingLocation() {
-        locationManger?.requestAlwaysAuthorization()
-        locationManger?.startUpdatingLocation()
-        pogressView.show()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            locationManger?.stopUpdatingLocation()
-            
-            if self.currentCoordinate == nil {
-                self.currentCoordinate = Coordinate(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            }
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
-}
-
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weatherList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell {
-            
-            let weather = weatherList[indexPath.row]
-            
-            let temperature = Helpers.shared.parseTemperature(from: weather.temperature)
-            cell.configure(image: weather.image, temperature: temperature, date: weather.date.format(), location: weather.location)
-            cell.selectionStyle = .none
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // print(weatherList[indexPath.row])
-        coordinator?.navigateToDetails(with: weatherList[indexPath.row])
+        locationManager?.start()
+        progressView.show()
     }
 }

@@ -39,16 +39,3 @@ struct WeatherResponse: Codable {
         let country: String
     }
 }
-
-struct WeatherObject {
-    let temperature: Double
-    let feelsLike: Double
-    let date: Date
-    let location: String
-    let presure: Int
-    let humidity: Int
-    let windSpeed: Double
-    let windDirection: String
-    let image: URL
-    let coordinate: Coordinate
-}

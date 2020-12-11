@@ -1,27 +1,15 @@
 import UIKit
 import MapKit
 
-extension MKMapView {
-    func fitAnnotations(inset: CGFloat) {
-        var zoomRect = MKMapRect.null;
-        for annotation in annotations {
-            let annotationPoint = MKMapPoint(annotation.coordinate)
-            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
-            zoomRect = zoomRect.union(pointRect);
-        }
-        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset), animated: true)
-    }
-}
-
 class DetailsViewController: UIViewController, Storyboarded {
-    
-    
+
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.contentInsetAdjustmentBehavior = .never
             scrollView.delegate = self
         }
     }
+
     @IBOutlet weak var mapView: MKMapView! {
         didSet {
             mapView.contentMode = .scaleAspectFit
@@ -30,7 +18,6 @@ class DetailsViewController: UIViewController, Storyboarded {
             mapView.isScrollEnabled = false
             mapView.isUserInteractionEnabled = false
             mapView.showsCompass = false
-            
         }
     }
     
@@ -50,9 +37,9 @@ class DetailsViewController: UIViewController, Storyboarded {
         super.viewWillAppear(animated)
         
         guard let weather = self.weather else { return }
+
         temperatureLabel.text = Helpers.shared.parseTemperature(from: weather.temperature)
-        temperatureLabel.text = Helpers.shared.parseTemperature(from: weather.temperature)
-        feelsLikeLabel.text = String(weather.feelsLike)
+        feelsLikeLabel.text = Helpers.shared.parseTemperature(from: weather.feelsLike)
         dateLabel.text = weather.date.format()
         locationLabel.text = weather.location
         
@@ -77,7 +64,6 @@ class DetailsViewController: UIViewController, Storyboarded {
 extension DetailsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-
         if offset.y < 0.0 {
             var transform = CATransform3DTranslate(CATransform3DIdentity, 0, (offset.y), 0)
             let scaleFactor = 1 + (-1 * offset.y / (mapView.frame.size.height / 2))

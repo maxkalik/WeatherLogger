@@ -18,20 +18,17 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        selectionStyle = .none
     }
     
-    func configure(image: URL?, temperature: String, date: String, location: String) {
-        guard let imageUrl = image else { return }
-        weatherImageView.load(from: imageUrl)
-        temperatureLabel.text = temperature
-        dateLabel.text = date
-        locationLabel.text = location
+    func configure(with object: WeatherObject?) {
+        guard let weather = object else { return }
+        
+        temperatureLabel.text = Helpers.shared.parseTemperature(from: weather.temperature)
+        dateLabel.text = weather.date.format()
+        locationLabel.text = weather.location
+        
+        guard let image = Helpers.shared.generateIconUrl(with: weather.image) else { return }
+        weatherImageView.load(from: image)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

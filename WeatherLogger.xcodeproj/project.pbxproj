@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111290A42583E84800FE473E /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111290A32583E84800FE473E /* TableViewDataSource.swift */; };
 		114E8ADD2582A89000043C70 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8ADB2582A89000043C70 /* TableViewCell.swift */; };
 		114E8ADE2582A89000043C70 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114E8ADC2582A89000043C70 /* TableViewCell.xib */; };
-		114E8B1E2582C88300043C70 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B1D2582C88300043C70 /* Location.swift */; };
+		114E8B1E2582C88300043C70 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B1D2582C88300043C70 /* LocationManager.swift */; };
 		114E8B222582D62800043C70 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B212582D62800043C70 /* UIImageView.swift */; };
 		114E8B252583050F00043C70 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B242583050F00043C70 /* ProgressView.swift */; };
 		114E8B282583117A00043C70 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8B272583117A00043C70 /* Helpers.swift */; };
@@ -27,12 +28,16 @@
 		119539F92581699600E73C38 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119539F82581699600E73C38 /* Coordinator.swift */; };
 		119539FE25816CE000E73C38 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119539FD25816CE000E73C38 /* MainCoordinator.swift */; };
 		11953A0225816DA400E73C38 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11953A0125816DA400E73C38 /* Storyboarded.swift */; };
+		11B51E372583984D00672AAC /* WeatherObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51E362583984D00672AAC /* WeatherObject.swift */; };
+		11B51E3F2583CA3C00672AAC /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51E3E2583CA3C00672AAC /* Date.swift */; };
+		11B51E462583DF0700672AAC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51E452583DF0700672AAC /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		111290A32583E84800FE473E /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		114E8ADB2582A89000043C70 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		114E8ADC2582A89000043C70 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
-		114E8B1D2582C88300043C70 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		114E8B1D2582C88300043C70 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		114E8B212582D62800043C70 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		114E8B242583050F00043C70 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		114E8B272583117A00043C70 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -52,6 +57,9 @@
 		119539F82581699600E73C38 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		119539FD25816CE000E73C38 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		11953A0125816DA400E73C38 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		11B51E362583984D00672AAC /* WeatherObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherObject.swift; sourceTree = "<group>"; };
+		11B51E3E2583CA3C00672AAC /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		11B51E452583DF0700672AAC /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +85,7 @@
 		114E8B1C2582C86500043C70 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				114E8B1D2582C88300043C70 /* Location.swift */,
+				114E8B1D2582C88300043C70 /* LocationManager.swift */,
 				114E8B272583117A00043C70 /* Helpers.swift */,
 			);
 			path = Helpers;
@@ -88,6 +96,8 @@
 			children = (
 				116CDEE62581528D00793435 /* URLSession.swift */,
 				114E8B212582D62800043C70 /* UIImageView.swift */,
+				11B51E3E2583CA3C00672AAC /* Date.swift */,
+				11B51E452583DF0700672AAC /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -105,6 +115,7 @@
 			children = (
 				11701B542580164C00F1423F /* DetailsViewController.swift */,
 				119539F325815D6A00E73C38 /* HomeViewController.swift */,
+				111290A32583E84800FE473E /* TableViewDataSource.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -165,8 +176,9 @@
 		11701B692580470000F1423F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				116CDEE22581524200793435 /* WeatherResponse.swift */,
 				114E8B2A2583192C00043C70 /* Coordinate.swift */,
+				116CDEE22581524200793435 /* WeatherResponse.swift */,
+				11B51E362583984D00672AAC /* WeatherObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,14 +278,18 @@
 				11701B552580164C00F1423F /* DetailsViewController.swift in Sources */,
 				114E8B222582D62800043C70 /* UIImageView.swift in Sources */,
 				11701B512580164C00F1423F /* AppDelegate.swift in Sources */,
+				111290A42583E84800FE473E /* TableViewDataSource.swift in Sources */,
 				119539F425815D6A00E73C38 /* HomeViewController.swift in Sources */,
+				11B51E3F2583CA3C00672AAC /* Date.swift in Sources */,
 				119539F92581699600E73C38 /* Coordinator.swift in Sources */,
 				114E8ADD2582A89000043C70 /* TableViewCell.swift in Sources */,
 				116CDEED2581538800793435 /* NetworkService.swift in Sources */,
+				11B51E372583984D00672AAC /* WeatherObject.swift in Sources */,
 				11953A0225816DA400E73C38 /* Storyboarded.swift in Sources */,
+				11B51E462583DF0700672AAC /* UIViewController.swift in Sources */,
 				119539FE25816CE000E73C38 /* MainCoordinator.swift in Sources */,
 				114E8B252583050F00043C70 /* ProgressView.swift in Sources */,
-				114E8B1E2582C88300043C70 /* Location.swift in Sources */,
+				114E8B1E2582C88300043C70 /* LocationManager.swift in Sources */,
 				114E8B282583117A00043C70 /* Helpers.swift in Sources */,
 				11701B532580164C00F1423F /* SceneDelegate.swift in Sources */,
 			);
