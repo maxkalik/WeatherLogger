@@ -34,6 +34,7 @@
 		11DE8B212584255500C45085 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE8B202584255500C45085 /* AnnotationView.swift */; };
 		11DE8B26258449E700C45085 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE8B25258449E700C45085 /* Annotation.swift */; };
 		11DE8B2925844DA500C45085 /* DetailsViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE8B2825844DA500C45085 /* DetailsViewHelper.swift */; };
+		11DE8B2F2584586F00C45085 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE8B2E2584586F00C45085 /* ButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		11DE8B202584255500C45085 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		11DE8B25258449E700C45085 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		11DE8B2825844DA500C45085 /* DetailsViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewHelper.swift; sourceTree = "<group>"; };
+		11DE8B2E2584586F00C45085 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				114E8B242583050F00043C70 /* ProgressView.swift */,
 				11DE8B202584255500C45085 /* AnnotationView.swift */,
+				11DE8B2E2584586F00C45085 /* ButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			files = (
 				116CDEE32581524200793435 /* WeatherResponse.swift in Sources */,
 				116CDEE72581528D00793435 /* URLSession.swift in Sources */,
+				11DE8B2F2584586F00C45085 /* ButtonView.swift in Sources */,
 				114E8B2B2583192C00043C70 /* Coordinate.swift in Sources */,
 				11701B552580164C00F1423F /* DetailsViewController.swift in Sources */,
 				114E8B222582D62800043C70 /* UIImageView.swift in Sources */,

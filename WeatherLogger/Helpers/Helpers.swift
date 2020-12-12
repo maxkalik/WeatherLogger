@@ -19,4 +19,12 @@ class Helpers {
         let temperature = String(format: "%.0f", kelvin - 273.15)
         return "\(temperature) Cº"
     }
+    
+    func getWindDirection(from degree: Int) -> String? {
+        if degree < 0 { return nil }
+
+        let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+        let index = Int((Double(degree) + 22.5) / 45.0) & 7
+        return directions[index]
+    }
 }

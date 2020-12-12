@@ -21,6 +21,8 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
         tableView.separatorStyle = .none
         tableView.rowHeight = 100.0
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        tableView.contentInset = insets
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -48,4 +50,14 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         coordinator?.navigateToDetails(with: list[indexPath.row])
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            list.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }

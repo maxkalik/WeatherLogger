@@ -25,11 +25,12 @@ class DetailsViewHelper {
                 weather.location
             ]
         case .details:
+            let windDirection = Helpers.shared.getWindDirection(from: weather.windDirection)
             return [
                 String(weather.presure),
                 String(weather.humidity),
                 String(weather.windSpeed),
-                String(weather.windDirection)
+                windDirection ?? "–"
             ]
         }
     }

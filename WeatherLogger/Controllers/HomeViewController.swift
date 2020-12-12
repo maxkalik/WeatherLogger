@@ -51,6 +51,7 @@ class HomeViewController: UIViewController, Storyboarded, LocationManagerDelegat
     
     func didFailWithError(_ error: Error) {
         simpleAlert(title: "Error", msg: error.localizedDescription)
+        progressView.hide()
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
