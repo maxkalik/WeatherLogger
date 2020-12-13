@@ -8,8 +8,9 @@
 import UIKit
 import MapKit
 
-class Helpers {
-    static var shared = Helpers()
+final class Parser {
+    static var shared = Parser()
+    private init() {}
     
     func generateIconUrl(with name: String) -> URL? {
         return URL(string: "http://openweathermap.org/img/wn/\(name)@2x.png")
@@ -20,10 +21,10 @@ class Helpers {
         return "\(temperature) Cº"
     }
     
-    func getWindDirection(from degree: Int) -> String? {
+    func getWindDirection(from degree: Int16) -> String? {
         if degree < 0 { return nil }
 
-        let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+        let directions = ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
         let index = Int((Double(degree) + 22.5) / 45.0) & 7
         return directions[index]
     }
