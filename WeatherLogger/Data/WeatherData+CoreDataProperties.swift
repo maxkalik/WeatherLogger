@@ -17,7 +17,7 @@ extension WeatherData {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var feelsLike: NSDecimalNumber?
+    @NSManaged public var feelsLike: Double
     @NSManaged public var humidity: Int16
     @NSManaged public var image: String?
     @NSManaged public var latitude: Double
@@ -27,6 +27,7 @@ extension WeatherData {
     @NSManaged public var temperature: Double
     @NSManaged public var windDirection: Int16
     @NSManaged public var windSpeed: Double
+    @NSManaged public var id: String
 
 }
 
