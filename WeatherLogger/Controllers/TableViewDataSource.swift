@@ -7,14 +7,21 @@
 
 import UIKit
 
-class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-    
-    let tableView: UITableView
-    var list = [WeatherObject]()
-    var coordinator: MainCoordinator?
+protocol ViewControllerDelegate: class {
+    func didRemove(_ item: WeatherData)
+    func didSelectRow(with: WeatherData)
+}
 
-    init(tableView: UITableView) {
+class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+
+    let tableView: UITableView
+    weak var delegate: ViewControllerDelegate?
+    var dataList: [WeatherData]
+
+    init(tableView: UITableView, dataList: [WeatherData], withDelegate delegate: ViewControllerDelegate) {
         self.tableView = tableView
+        self.dataList = dataList
+        self.delegate = delegate
         super.init()
 
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
@@ -28,26 +35,26 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell {
-            cell.configure(with: list[indexPath.row])
+            cell.configure(with: dataList[indexPath.row])
             return cell
         }
         return UITableViewCell()
     }
 
-    func insertRow(with data: WeatherObject) {
-        list.insert(data, at: 0)
+    func insertRow(with data: WeatherData) {
+        dataList.insert(data, at: 0)
         DispatchQueue.main.async { [self] in
             tableView.insertRows(at: [IndexPath(item: 0, section: 0)], with: .fade)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.navigateToDetails(with: list[indexPath.row])
+        delegate?.didSelectRow(with: dataList[indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -56,7 +63,8 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            list.remove(at: indexPath.row)
+            delegate?.didRemove(dataList[indexPath.row])
+            dataList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

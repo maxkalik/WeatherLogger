@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController, Storyboarded {
     @IBOutlet var generalLabels: [UILabel]!
     @IBOutlet var detailsLabels: [UILabel]!
     
-    var weather: WeatherObject?
+    var weather: WeatherData?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

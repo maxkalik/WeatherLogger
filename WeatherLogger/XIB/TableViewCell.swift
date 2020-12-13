@@ -21,14 +21,14 @@ class TableViewCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func configure(with object: WeatherObject?) {
+    func configure(with object: WeatherData?) {
         guard let weather = object else { return }
         
-        temperatureLabel.text = Helpers.shared.parseTemperature(from: weather.temperature)
-        dateLabel.text = weather.date.format()
+        temperatureLabel.text = Parser.shared.parseTemperature(from: weather.temperature)
+        dateLabel.text = weather.date?.format()
         locationLabel.text = weather.location
         
-        guard let image = Helpers.shared.generateIconUrl(with: weather.image) else { return }
+        guard let imageUrlString = weather.image, let image = Parser.shared.generateIconUrl(with: imageUrlString) else { return }
         weatherImageView.load(from: image)
     }
 }

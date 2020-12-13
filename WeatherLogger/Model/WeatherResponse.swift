@@ -8,7 +8,6 @@
 import Foundation
 
 struct WeatherResponse: Codable {
-    let id: Int
     let main: Main
     let wind: Wind
     let weather: [Weather]
@@ -17,11 +16,10 @@ struct WeatherResponse: Codable {
     
     struct Wind: Codable {
         let speed: Double
-        let deg: Int
+        let deg: Int16
     }
     
     struct Weather: Codable {
-        let id: Int
         let description: String
         let icon: String
     }
@@ -31,8 +29,8 @@ struct WeatherResponse: Codable {
         let feelsLike: Double
         let tempMin: Double
         let tempMax: Double
-        let pressure: Int
-        let humidity: Int
+        let pressure: Int16
+        let humidity: Int16
     }
     
     struct Sys: Codable {

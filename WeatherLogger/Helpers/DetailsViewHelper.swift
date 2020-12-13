@@ -12,24 +12,25 @@ enum DetailsViewLabelGroup: String {
     case general, details
 }
 
-class DetailsViewHelper {
+final class DetailsViewHelper {
     static var shared = DetailsViewHelper()
+    private init() {}
     
-    func prepareLabelText(from weather: WeatherObject, for labelGroup: DetailsViewLabelGroup) -> [String] {
+    func prepareLabelText(from weather: WeatherData, for labelGroup: DetailsViewLabelGroup) -> [String] {
         switch labelGroup {
         case .general:
             return [
-                Helpers.shared.parseTemperature(from: weather.temperature),
-                Helpers.shared.parseTemperature(from: weather.feelsLike),
-                weather.date.format(),
-                weather.location
+                Parser.shared.parseTemperature(from: weather.temperature),
+                Parser.shared.parseTemperature(from: weather.feelsLike),
+                weather.date!.format(),
+                weather.location ?? ""
             ]
         case .details:
-            let windDirection = Helpers.shared.getWindDirection(from: weather.windDirection)
+            let windDirection = Parser.shared.getWindDirection(from: weather.windDirection)
             return [
-                String(weather.presure),
-                String(weather.humidity),
-                String(weather.windSpeed),
+                "\(weather.presure) hPa",
+                "\(weather.humidity) %",
+                "\(weather.windSpeed) m/s",
                 windDirection ?? "–"
             ]
         }
@@ -41,11 +42,13 @@ class DetailsViewHelper {
         }
     }
     
-    func getAnnotation(with weather: WeatherObject?, handler: @escaping (Annotation, CLLocationCoordinate2D) -> Void) {
-        guard let weather = weather, let url = Helpers.shared.generateIconUrl(with: weather.image) else { return }
+    func getAnnotation(with weather: WeatherData?, handler: @escaping (Annotation, CLLocationCoordinate2D) -> Void) {
+        guard let weather = weather,
+              let imageUrlString = weather.image,
+              let url = Parser.shared.generateIconUrl(with: imageUrlString) else { return }
         
-        let latitude = weather.coordinate.latitude
-        let longitude = weather.coordinate.longitude
+        let latitude = weather.latitude
+        let longitude = weather.longitude
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 
         do {

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class NetworkService {
-    static let shared = NetworkService()
+final class NetworkService {
     
+    static let shared = NetworkService()
     private init() {}
     
     private let urlSession = URLSession.shared
@@ -19,8 +19,6 @@ class NetworkService {
     private let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        let dateFormatter = DateFormatter()
-        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
         return jsonDecoder
     }()
     
@@ -34,10 +32,12 @@ class NetworkService {
     
     private func fetchData<T: Decodable>(url: URL?, lat: Double, lon: Double, completion: @escaping (Result<T, NetworkServiceError>) -> Void) {
 
+        
         guard let urlObj = url, var urlComponents = URLComponents(url: urlObj, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
             return
         }
+        
         
         let queryItems = [URLQueryItem(name: "lat", value: String(lat)), URLQueryItem(name: "lon", value: String(lon)), URLQueryItem(name: "appid", value: appId)]
         urlComponents.queryItems = queryItems
@@ -46,6 +46,7 @@ class NetworkService {
             return
         }
         
+
         urlSession.dataTask(with: url) { result in
             
             switch result {
@@ -54,7 +55,6 @@ class NetworkService {
                     completion(.failure(.invalidResponse))
                     return
                 }
-
                 do {
                     let values = try self.jsonDecoder.decode(T.self, from: data)
                     completion(.success(values))
@@ -66,6 +66,7 @@ class NetworkService {
                 completion(.failure(.apiError))
             }
         }.resume()
+     
     }
     
     func fetchWeather(from latitude: Double, longitude: Double, result: @escaping (Result<WeatherResponse, NetworkServiceError>) -> Void) {
