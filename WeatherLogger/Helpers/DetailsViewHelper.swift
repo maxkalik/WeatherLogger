@@ -54,6 +54,7 @@ final class DetailsViewHelper {
         do {
             let data = try Data(contentsOf: url)
             let annotation = Annotation(image: UIImage(data: data), coordinate: coordinate)
+            annotation.accessibilityLabel = "Annotation Pin"
             handler(annotation, coordinate)
         } catch {
             print(error.localizedDescription)

@@ -14,9 +14,20 @@ class BottomBarView: UIView {
         backgroundColor = .clear
     }
     
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        let gradientLayer = ViewHelper.shared.setGradientBackground(colorTop: UIColor.white, colorBottom: UIColor.white, in: bounds)
+        
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            setup(with: UIColor.black)
+        default:
+            setup(with: UIColor.white)
+        }
+    }
+    
+    func setup(with color: UIColor) {
+        let gradientLayer = ViewHelper.shared.setGradientBackground(colorTop: color, colorBottom: color, in: bounds)
         layer.insertSublayer(gradientLayer, at: 0)
     }
     

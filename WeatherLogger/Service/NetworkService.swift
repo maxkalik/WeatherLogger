@@ -31,13 +31,10 @@ final class NetworkService {
     }
     
     private func fetchData<T: Decodable>(url: URL?, lat: Double, lon: Double, completion: @escaping (Result<T, NetworkServiceError>) -> Void) {
-
-        
         guard let urlObj = url, var urlComponents = URLComponents(url: urlObj, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
             return
         }
-        
         
         let queryItems = [URLQueryItem(name: "lat", value: String(lat)), URLQueryItem(name: "lon", value: String(lon)), URLQueryItem(name: "appid", value: appId)]
         urlComponents.queryItems = queryItems
@@ -46,9 +43,7 @@ final class NetworkService {
             return
         }
         
-
-        urlSession.dataTask(with: url) { result in
-            
+        urlSession.dataTask(with: url) { result in    
             switch result {
             case .success(let (response, data)):
                 guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {

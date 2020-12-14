@@ -58,7 +58,7 @@ extension HomeViewController: LocationManagerDelegate {
             case .failure(let error):
                 print(error.localizedDescription)
                 DispatchQueue.main.async { [self] in
-                    simpleAlert(title: "Error", msg: error.localizedDescription)
+                    simpleAlert(title: "Internet connection failure", msg: "For using WeatherLogger, you need to have internet connection on in your iPhone.")
                     progressView.hide()
                 }
             }
@@ -66,7 +66,7 @@ extension HomeViewController: LocationManagerDelegate {
     }
     
     func didFailWithError(_ error: Error) {
-        simpleAlert(title: "Error", msg: error.localizedDescription)
+        simpleAlert(title: "Current location failure", msg: "For using WeatherLogger, please allow to find your current location. You can turn this on in your iPhone settings.")
         progressView.hide()
     }
 }

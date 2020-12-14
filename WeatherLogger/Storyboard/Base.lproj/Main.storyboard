@@ -82,7 +82,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8In-oW-bEw">
                                                 <rect key="frame" x="0.0" y="0.0" width="412" height="789.5"/>
                                                 <subviews>
-                                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="R69-vS-iHi">
+                                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="R69-vS-iHi" userLabel="Map Specific Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="412" height="329.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="R69-vS-iHi" secondAttribute="height" multiplier="1:0.8" id="dU3-9S-hCW"/>
