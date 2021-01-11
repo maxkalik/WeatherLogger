@@ -61,6 +61,16 @@ class HomeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDeleg
         return true
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextAction = UIContextualAction(style: .normal, title: "Delete") { (_, _, success) in
+            success(true)
+        }
+        contextAction.backgroundColor = .black
+        contextAction.title = ""
+        contextAction.image = UIImage(named: "icon_trash_circle")
+        return UISwipeActionsConfiguration(actions: [contextAction])
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             delegate?.didRemove(dataList[indexPath.row])

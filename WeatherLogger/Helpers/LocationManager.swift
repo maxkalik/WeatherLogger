@@ -35,6 +35,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         locationManager?.requestAlwaysAuthorization()
         locationManager?.startUpdatingLocation()
+        // locationManager?.requestLocation() // << once but too long 10 sec
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

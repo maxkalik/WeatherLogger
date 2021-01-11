@@ -42,7 +42,6 @@ class DetailsViewController: UIViewController, Storyboarded {
     }
 }
 
-
 // MARK: - UIScrollViewDelegate
 
 extension DetailsViewController: UIScrollViewDelegate {
