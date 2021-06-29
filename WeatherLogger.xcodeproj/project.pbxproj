@@ -3,8 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
+
+/* Begin PBXAggregateTarget section */
+		3778C97E268B92CE0003BAB8 /* Periphery */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3778C981268B92CE0003BAB8 /* Build configuration list for PBXAggregateTarget "Periphery" */;
+			buildPhases = (
+				3778C982268B92E30003BAB8 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Periphery;
+			productName = Periphery;
+		};
+/* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
 		111290A42583E84800FE473E /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111290A32583E84800FE473E /* TableViewDataSource.swift */; };
@@ -336,6 +350,9 @@
 					11701B4C2580164C00F1423F = {
 						CreatedOnToolsVersion = 12.2;
 					};
+					3778C97E268B92CE0003BAB8 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 				};
 			};
 			buildConfigurationList = 11701B482580164C00F1423F /* Build configuration list for PBXProject "WeatherLogger" */;
@@ -347,12 +364,16 @@
 				Base,
 			);
 			mainGroup = 11701B442580164C00F1423F;
+			packageReferences = (
+				37A2B77A268B6081003E01FD /* XCRemoteSwiftPackageReference "periphery" */,
+			);
 			productRefGroup = 11701B4E2580164C00F1423F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				11701B4C2580164C00F1423F /* WeatherLogger */,
 				1169B43A2586C9540018437E /* WeatherLoggerUITests */,
+				3778C97E268B92CE0003BAB8 /* Periphery */,
 			);
 		};
 /* End PBXProject section */
@@ -377,6 +398,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3778C982268B92E30003BAB8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "periphery scan --project WeatherLogger.xcodeproj --schemes WeatherLogger --targets WeatherLogger --format xcode\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1169B4372586C9540018437E /* Sources */ = {
@@ -649,6 +690,24 @@
 			};
 			name = Release;
 		};
+		3778C97F268B92CE0003BAB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P353H6D448;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3778C980268B92CE0003BAB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P353H6D448;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -679,7 +738,27 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		3778C981268B92CE0003BAB8 /* Build configuration list for PBXAggregateTarget "Periphery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3778C97F268B92CE0003BAB8 /* Debug */,
+				3778C980268B92CE0003BAB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37A2B77A268B6081003E01FD /* XCRemoteSwiftPackageReference "periphery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/peripheryapp/periphery.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		11DE8B3325851F3B00C45085 /* WeatherLogger.xcdatamodeld */ = {
